@@ -37,9 +37,9 @@ After cloning the project cd into it and run it.
 - Price Tracker to ensure customers know what they will pay for
 ## Screenshots
 
-![App Screenshot](assets/screenshots/Screenshot_1731272183.png)
+<img src="assets/screenshots/Screenshot_1731272183.png" width="240" height="600" >
 
-![App Screenshot](assets/screenshots/Screenshot_1731272193.png)
-![App Screenshot](assets/screenshots/Screenshot_1731272198.png)
-![App Screenshot](assets/screenshots/Screenshot_1731272208.png)
+<img src="assets/screenshots/Screenshot_1731272193.png" width="240" height="600" >
+<img src="assets/screenshots/Screenshot_1731272198.png" width="240" height="600" alt="HomePage">
+<img src="assets/screenshots/Screenshot_1731272205.png" width="240" height="600" alt="HomePage">
 
