@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:send_me_deliveries/bloc/authentication/authentication_bloc.dart';
 import 'package:send_me_deliveries/bloc/get_delivery/get_delivery_bloc.dart';
+import 'package:send_me_deliveries/screens/delivery_details.dart';
 import 'package:send_me_deliveries/widgets/app_bar_contents.dart';
 import 'package:send_me_deliveries/widgets/home_container_circle.dart';
 
@@ -24,6 +26,8 @@ class HomeScreen extends StatelessWidget {
       child: BlocBuilder<GetDeliveryBloc, GetDeliveryState>(
         builder: (context, state) {
           if (state is GetDeliverySuccess) {
+            final deliveries = state.delivery;
+            deliveries.sort((a, b) => b.deliveryDate.compareTo(a.deliveryDate));
             String shortenDeliveryNumber(String deliveryNumber,
                 {int maxLength = 5}) {
               if (deliveryNumber.length <= maxLength) {
@@ -31,6 +35,11 @@ class HomeScreen extends StatelessWidget {
               } else {
                 return '${deliveryNumber.substring(0, maxLength)}...';
               }
+            }
+
+            String formatDate(DateTime date) {
+              final DateFormat formatter = DateFormat('dd MMM yyyy');
+              return formatter.format(date);
             }
 
             return CustomScrollView(
@@ -120,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Delivered on 12/12/2021',
+                                    'Delivered on ${formatDate(deliveries[index].deliveryDate)}',
                                     style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -132,7 +141,13 @@ class HomeScreen extends StatelessWidget {
                               Spacer(),
                               IconButton(
                                 icon: Icon(Icons.arrow_forward_ios),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DeliveryDetails(
+                                              delivery: deliveries[index])));
+                                },
                               )
                             ],
                           ),

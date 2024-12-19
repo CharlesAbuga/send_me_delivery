@@ -11,6 +11,6 @@ final class UpdateUserInitial extends UpdateUserState {}
 
 final class UpdateUserLoading extends UpdateUserState {}
 
-final class UpdaterUserSuccess extends UpdateUserState {}
+final class UpdateUserSuccess extends UpdateUserState {}
 
-final class UpdaterUserFailure extends UpdateUserState {}
+final class UpdateUserFailure extends UpdateUserState {}

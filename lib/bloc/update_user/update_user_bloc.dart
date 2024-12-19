@@ -18,10 +18,10 @@ class UpdateUserBloc extends Bloc<UpdateUserEvent, UpdateUserState> {
       try {
         await _userRepository.setUserData(event.user);
 
-        emit(UpdaterUserSuccess());
+        emit(UpdateUserSuccess());
       } catch (e) {
         log(e.toString());
-        emit(UpdaterUserFailure());
+        emit(UpdateUserFailure());
       }
     });
   }

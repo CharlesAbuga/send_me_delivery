@@ -11,6 +11,7 @@ import 'package:send_me_deliveries/bloc/add_delivery/add_delivery_bloc.dart';
 import 'package:send_me_deliveries/bloc/authentication/authentication_bloc.dart';
 import 'package:send_me_deliveries/bloc/sign_in/sign_in_bloc.dart';
 import 'package:send_me_deliveries/bloc/update_user/update_user_bloc.dart';
+import 'package:send_me_deliveries/provider/theme_provider.dart';
 import 'package:send_me_deliveries/screens/registration.dart';
 import 'package:send_me_deliveries/simple_bloc_observer.dart';
 import 'package:send_me_deliveries/themes.dart';
@@ -18,7 +19,10 @@ import 'package:user_repository/user_repository.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  ThemeChange themeChange = ThemeChange(lightTheme);
+  await themeChange.loadTheme();
   WidgetsFlutterBinding.ensureInitialized();
+
   if (Platform.isAndroid) {
     await Firebase.initializeApp(
         options: FirebaseOptions(
@@ -30,11 +34,14 @@ void main() async {
   }
   Bloc.observer = SimpleBlocObserver();
   runApp(ChangeNotifierProvider(
-      create: (context) => AuthState(),
-      child: MyApp(
-        deliveryRepository: FirebaseDeliveryRepository(),
-        userRepository: FirebaseUserRepository(),
-      )));
+    create: (context) => ThemeChange(lightTheme),
+    child: ChangeNotifierProvider(
+        create: (context) => AuthState(),
+        child: MyApp(
+          deliveryRepository: FirebaseDeliveryRepository(),
+          userRepository: FirebaseUserRepository(),
+        )),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -74,11 +81,13 @@ class MyApp extends StatelessWidget {
                     deliveryRepository: FirebaseDeliveryRepository(),
                   )),
         ],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: lightTheme,
-          home: const Registration(),
-        ),
+        child: Consumer<ThemeChange>(builder: (context, theme, child) {
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: theme.getTheme(),
+            home: const Registration(),
+          );
+        }),
       ),
     );
   }

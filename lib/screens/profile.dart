@@ -183,7 +183,16 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.15),
-                      BlocBuilder<UpdateUserBloc, UpdateUserState>(
+                      BlocConsumer<UpdateUserBloc, UpdateUserState>(
+                        listener: (context, state) {
+                          if (state is UpdateUserSuccess) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Profile updated')));
+                          } else if (state is UpdateUserFailure) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text('Profile update failed')));
+                          }
+                        },
                         builder: (context, state) {
                           return ElevatedButton(
                               style: ElevatedButton.styleFrom(

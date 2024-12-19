@@ -110,7 +110,7 @@ class _AppBarContentsState extends State<AppBarContents> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Text('Please enter your Tracking ID',
+                    child: Text('Please enter Delivery Number',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.surface,
                           fontSize: 12,
@@ -139,7 +139,7 @@ class _AppBarContentsState extends State<AppBarContents> {
                               ),
                             ),
                             placeholderStyle: TextStyle(fontSize: 10),
-                            placeholder: 'Enter Tracking ID',
+                            placeholder: 'Enter Delivery Number',
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.surface,

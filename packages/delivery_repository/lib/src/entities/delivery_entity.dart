@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 class DeliveryEntity extends Equatable {
   String userId;
   String deliveryNumber;
+  String? itemName;
 
   DateTime deliveryDate;
   String deliveryStatus;
@@ -12,6 +13,7 @@ class DeliveryEntity extends Equatable {
   String deliveryCounty;
   String deliveryPrice;
   int deliveryWeight;
+  String senderCounty;
 
   String recipientName;
   String recipientPhone;
@@ -37,6 +39,8 @@ class DeliveryEntity extends Equatable {
     required this.deliveryCounty,
     required this.deliveryPrice,
     required this.deliveryWeight,
+    this.itemName,
+    required this.senderCounty,
   });
 
   Map<String, dynamic> toDocument() {
@@ -56,6 +60,8 @@ class DeliveryEntity extends Equatable {
       'deliveryCounty': deliveryCounty,
       'deliveryPrice': deliveryPrice,
       'deliveryWeight': deliveryWeight,
+      'senderCounty': senderCounty,
+      'itemName': itemName,
     };
   }
 
@@ -76,6 +82,8 @@ class DeliveryEntity extends Equatable {
       deliveryCounty: doc['deliveryCounty'] ?? '',
       deliveryPrice: doc['deliveryPrice'] ?? '',
       deliveryWeight: doc['deliveryWeight'] ?? 0,
+      senderCounty: doc['senderCounty'] ?? '',
+      itemName: doc['itemName'] ?? '',
     );
   }
 
@@ -93,9 +101,11 @@ class DeliveryEntity extends Equatable {
         senderName,
         senderPhone,
         senderEmail,
+        senderCounty,
         deliveryType,
         deliveryCounty,
         deliveryPrice,
         deliveryWeight,
+        itemName,
       ];
 }
